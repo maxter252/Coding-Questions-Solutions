@@ -40,4 +40,5 @@ def fizzbuzzwizz(n, conditions):
 fizzbuzzwizz(100, [
     ("fizz",lambda a : (a % 3) == 0),
     ("buzz",lambda a : (a % 5) == 0),
-    ("wizz",lambda a : a > 90)])
+    ("wizz",lambda a : a > 90)
+    ])
