@@ -1,26 +1,27 @@
+from Collections import Counter
+
+
 def isValid(s):
-    alpha_dict = {}
-    for i in s:
-        alpha_dict[i] = (alpha_dict[i] if i in alpha_dict else 0) + 1
-    
-    count=0
-    removals_available = 1
-    reference = alpha_dict[min(alpha_dict, key=(lambda k: alpha_dict[k]))]
-    print (reference)
-
-    for key, val in alpha_dict.items():
-        print (key, val)
-        if not reference:
-           reference = val 
-
-        if removals_available <= 0 and val != reference:
-            return 'NO'
-        elif removals_available >= 1 and val-1 == reference:
-            removals_available -= 1
-        elif val < reference:
-            return 'NO'
-
-    return 'YES'
+    """
+    Sherlock considers a string to be valid if all characters of 
+    the string appear the same number of times. It is also valid if 
+    he can remove just one character from everywhere in the string, and the 
+    remaining characters will occur the same number of times. Given 
+    a string , determine if it is valid. If so, return YES, otherwise 
+    return NO.
+    """
+    char_count = Counter(s)
+    char_count_values = list(char_count.values())
+    distinct_counts = Counter(char_count_values)
 
 
-print(isValid('aaabbccddee'))
+    if len(distinct_counts) == 1: return 'YES'
+    if len(distinct_counts) > 2: return 'NO'
+
+    min_count = min(char_count_values)
+    max_count = max(char_count_values)
+    if distinct_counts[1] == 1 : return "YES"
+    if distinct_counts[max_count] == 1 and max_count == min_count + 1:
+        return "YES"
+    else:
+        return "NO"
